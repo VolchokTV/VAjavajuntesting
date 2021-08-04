@@ -1,3 +1,3 @@
-# VAjavajuntesting
-jun testing
+# VA java jun testing
+Тестовое задание на вакансию Junior Java-разработчик.
 Воробьев Алексей Н.Новгород
