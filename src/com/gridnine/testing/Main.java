@@ -11,7 +11,7 @@ public class Main {
 
         List<Flight> airtravels = FlightBuilder.createFlights();
         Sorter sortByStartDate = new CaseDepartTooEarly(LocalDateTime.now());
-        Sorter filterDepartureBeforeArrival = new CaseDepartFromAir();
+        Sorter sortByAirDepart = new CaseDepartFromAir();
         Sorter filterLessTwoHoursTotalGroundTime = new CaseTooLongWait(7200);
 
         SorterOfRules sorter = new SorterOfRules();
@@ -25,6 +25,14 @@ public class Main {
         for (Flight flight : flightsUpcoming) {
             System.out.println(flight);
         }
+        // исключить перелеты с датой прилета позднее даты вылета
+        System.out.println("\nСписок авиа-перелетов c прибытием раньше вылета следующего :");
 
+        sorter.replace(sortByAirDepart);
+        List<Flight> flightsWithDeletedAirDepart = sorter.filter(airtravels);
+
+        for (Flight flight : flightsWithDeletedAirDepart) {
+            System.out.println(flight);
+        }
     }
 }
