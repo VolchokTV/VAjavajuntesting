@@ -4,6 +4,7 @@ import com.gridnine.testing.sort.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -22,17 +23,26 @@ public class Main {
         sorter.replace(sortByStartDate);
         List<Flight> flightsUpcoming = sorter.filter(airtravels);
 
-        for (Flight flight : flightsUpcoming) {
-            System.out.println(flight);
-        }
+        Stream streamFlightsUp = flightsUpcoming.stream();
+        flightsUpcoming.stream().forEach(x -> System.out.println(x));
+
         // исключить перелеты с датой прилета позднее даты вылета
         System.out.println("\nСписок авиа-перелетов c прибытием раньше вылета следующего :");
 
         sorter.replace(sortByAirDepart);
         List<Flight> flightsWithDeletedAirDepart = sorter.filter(airtravels);
 
-        for (Flight flight : flightsWithDeletedAirDepart) {
-            System.out.println(flight);
-        }
+        Stream streamFlightsWithDeletedAirDepart = flightsWithDeletedAirDepart.stream();
+        flightsWithDeletedAirDepart.stream().forEach(x -> System.out.println(x));
+
+        // исключить: перелеты если общее время, проведённое на земле превышает два часа
+        System.out.println("\nСписок авиа-перелетов c пересадкой меньше двух часов:");
+
+        sorter.replace(filterLessTwoHoursTotalGroundTime);
+        List<Flight> flightsLessTwoHoursWait = sorter.filter(airtravels);
+
+        Stream stream = flightsLessTwoHoursWait.stream();
+        flightsLessTwoHoursWait.stream().forEach(x -> System.out.println(x));
+
     }
 }
