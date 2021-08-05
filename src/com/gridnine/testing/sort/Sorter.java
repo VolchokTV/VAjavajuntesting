@@ -1,4 +1,6 @@
-package com.gridnine.testing;
+package com.gridnine.testing.sort;
+
+import com.gridnine.testing.Flight;
 
 public interface Sorter {
 

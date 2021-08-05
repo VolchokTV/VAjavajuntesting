@@ -1,10 +1,10 @@
-package com.gridnine.testing;
+package com.gridnine.testing.sort;
 
 public enum RulesToDelete {
 
     // вылет раньше текущего момента времени
 
-    DEPART_TO_EARLY,
+    DEPART_TOO_EARLY,
 
     // имеются сегменты с ВЫЛЕТом раньше прилета
 

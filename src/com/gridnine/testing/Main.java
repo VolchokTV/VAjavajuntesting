@@ -1,5 +1,7 @@
 package com.gridnine.testing;
 
+import com.gridnine.testing.sort.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -8,17 +10,17 @@ public class Main {
     public static void main(String[] args) {
 
         List<Flight> airtravels = FlightBuilder.createFlights();
-        Filter filterUpcoming = new FilterDepartureByTime(LocalDateTime.now());
-        Filter filterDepartureBeforeArrival = new FilterDepartureBeforeArrival();
-        Filter filterLessTwoHoursTotalGroundTime = new FilterTotalGroundTime(7200);
+        Sorter sortByStartDate = new CaseDepartTooEarly(LocalDateTime.now());
+        Sorter filterDepartureBeforeArrival = new CaseDepartFromAir();
+        Sorter filterLessTwoHoursTotalGroundTime = new CaseTooLongWait(7200);
 
-        FilterBuilder filterBuilder = new FilterBuilder();
+        SorterOfRules sorter = new SorterOfRules();
 
         // Перелеты с верной начальной датой
         System.out.println("\nUpcoming flights:");
 
-        filterBuilder.replace(filterUpcoming);
-        List<Flight> flightsUpcoming = filterBuilder.filter(flights);
+        sorter.replace(sortByStartDate);
+        List<Flight> flightsUpcoming = sorter.filter(airtravels);
 
         for (Flight flight : flightsUpcoming) {
             System.out.println(flight);
