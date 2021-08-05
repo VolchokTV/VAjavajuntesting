@@ -17,7 +17,7 @@ public class Main {
         SorterOfRules sorter = new SorterOfRules();
 
         // Перелеты с верной начальной датой
-        System.out.println("\nUpcoming flights:");
+        System.out.println("\nСписок авиа-перелетов позднее текущего времени:");
 
         sorter.replace(sortByStartDate);
         List<Flight> flightsUpcoming = sorter.filter(airtravels);
